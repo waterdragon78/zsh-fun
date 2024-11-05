@@ -14,9 +14,7 @@ while :; do
 		echo
 		exit
 	fi
-	if [[ "${chars[@]}" =~ "${hw[$count]}" ]] || [[ "${chars2[@]}" =~ "${hw[$count]}" ]]; then
-		:
-	else
+	if ! echo "${chars[@]}""${chars2[@]}" | grep -F "${hw[$count]}" > /dev/null 2>&1; then
 		if [[ "${hw[$count]}" == '☗' ]]; then
 			((count++))
 			cache="$cache "
@@ -27,6 +25,7 @@ while :; do
 		((count++))
 		continue
 	fi
+
 	a=1
 	until [[ "${chars[$e]}" == "${hw[$count]}" ]] || [[ "${chars2[$e]}" == "${hw[$count]}" ]]; do
 		if [[ "${chars2[@]}" =~ "${hw[$count]}" ]] && [[ ! "${nums[@]}" =~ "${hw[$count]}" ]]; then
